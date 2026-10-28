@@ -205,7 +205,7 @@ export function Shop({ draft, setDraft }) {
               <label className="f">Cancelar hasta (horas antes)<input type="number" min="0" value={draft.business.cancelHours} onChange={(e) => biz({ cancelHours: Number(e.target.value) })} /></label>
               <label className="f">Separación entre horarios
                 <select value={draft.business.slotStep} onChange={(e) => biz({ slotStep: Number(e.target.value) })}>
-                  <option value={15}>Cada 15 min</option><option value={30}>Cada 30 min</option>
+                  <option value={15}>Cada 15 min</option><option value={30}>Cada 30 min</option><option value={45}>Cada 45 min</option><option value={60}>Cada 60 min</option>
                 </select>
               </label>
             </div>

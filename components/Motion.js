@@ -25,18 +25,6 @@ export default function Motion() {
 
     const parallax = [...document.querySelectorAll("[data-parallax]")];
     const marks = [...document.querySelectorAll("[data-stretch]")];
-    const process = document.querySelector("[data-process]");
-    const rail = process?.querySelector(".rail");
-
-    // en celular los pasos se apilan: sin sección fija ni desplazamiento horizontal
-    const narrow = () => window.innerWidth <= 640;
-    const sizeProcess = () => {
-      if (!process || !rail || reduce) return;
-      if (narrow()) { process.style.height = ""; rail.style.transform = ""; return; }
-      const extra = rail.scrollWidth - window.innerWidth;
-      process.style.height = `${window.innerHeight + Math.max(0, extra)}px`;
-    };
-    sizeProcess();
 
     let raf = 0;
     const frame = (t) => {
@@ -63,12 +51,6 @@ export default function Motion() {
         }
         if (el.classList.contains("ready")) el.style.setProperty("--w", w.toFixed(1));
       }
-      if (process && rail && !reduce && !narrow()) {
-        const r = process.getBoundingClientRect();
-        const total = process.offsetHeight - vh;
-        const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
-        rail.style.transform = `translate3d(${-(rail.scrollWidth - window.innerWidth) * p}px,0,0)`;
-      }
       raf = requestAnimationFrame(frame);
     };
     raf = requestAnimationFrame(frame);
@@ -83,13 +65,11 @@ export default function Motion() {
       else target.scrollIntoView({ behavior: "smooth" });
     };
     document.addEventListener("click", onClick);
-    window.addEventListener("resize", sizeProcess);
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect(); mo.disconnect();
       document.removeEventListener("click", onClick);
-      window.removeEventListener("resize", sizeProcess);
       lenis?.destroy();
     };
   }, []);

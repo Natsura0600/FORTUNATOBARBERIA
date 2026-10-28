@@ -2,10 +2,13 @@
 import { useCallback, useEffect, useState } from "react";
 import Agenda from "./Agenda";
 import Cash from "./Cash";
+import Clients from "./Clients";
+import Backup from "./Backup";
 import { Prices, Barbers, Notices, Shop } from "./Settings";
 
 const TABS = [
   ["agenda", "Agenda"],
+  ["clientes", "Clientes"],
   ["caja", "Caja"],
   ["precios", "Servicios y precios"],
   ["barberos", "Barberos"],
@@ -99,11 +102,12 @@ export default function AdminApp() {
           <p className="warn">Modo de prueba: no hay base de datos conectada y los datos se borran al reiniciar. Configurá Upstash Redis (ver README).</p>
         )}
         {tab === "agenda" && <Agenda config={config} notify={notify} />}
+        {tab === "clientes" && <Clients notify={notify} />}
         {tab === "caja" && <Cash config={config} notify={notify} />}
         {tab === "precios" && <Prices {...props} />}
         {tab === "barberos" && <Barbers {...props} uploads={uploads} onPhoto={onPhoto} saved={config} />}
         {tab === "avisos" && <Notices {...props} />}
-        {tab === "local" && <Shop {...props} />}
+        {tab === "local" && <><Shop {...props} /><Backup notify={notify} /></>}
       </div>
       {dirty && (
         <div className="save">

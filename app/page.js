@@ -2,7 +2,7 @@ import { getConfig, publicConfig } from "@/lib/store";
 import Motion from "@/components/Motion";
 import Booking from "@/components/Booking";
 import {
-  Preloader, Header, Ticker, Hero, Studio, Services, Team, Process, Notices, Visit, Reviews, Footer,
+  Preloader, Header, Ticker, Hero, Studio, Services, Team, Notices, Visit, Reviews, Footer,
 } from "@/components/Site";
 
 // Siempre lee la config actual (lo que se edita en /admin se ve al instante).
@@ -20,7 +20,6 @@ export default async function Home() {
         <Studio cfg={cfg} />
         <Services cfg={cfg} />
         <Team cfg={cfg} />
-        <Process cfg={cfg} />
         <Booking cfg={cfg} />
         <Notices cfg={cfg} />
         <Visit cfg={cfg} />

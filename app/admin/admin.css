@@ -120,3 +120,27 @@
 .admin label.sbtn { cursor: pointer; }
 .admin label.sbtn.dis { opacity: 0.4; pointer-events: none; }
 .admin input.sr:focus-visible + label { outline: 2px solid var(--black); outline-offset: 3px; }
+
+/* ───────── clientes ───────── */
+.admin .grow { flex: 1 1 260px; }
+.admin input.sr { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.admin .clientsT tbody tr { cursor: pointer; }
+.admin .clientsT tbody tr:hover td, .admin .clientsT tbody tr:focus-visible td { background: var(--fill); }
+.admin .clientsT tbody tr:focus-visible { outline: 2px solid var(--black); outline-offset: -2px; }
+.admin .mapList { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; }
+.admin .mapList li { display: flex; gap: 12px; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 4px 0; }
+.admin ul.notes { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.admin .modal { position: fixed; inset: 0; z-index: 40; background: rgba(0, 0, 0, 0.45); display: grid; place-items: center; padding: 16px; }
+.admin .modal .sheet { background: var(--white); border-radius: 12px; width: min(680px, 100%); max-height: 92svh; overflow: auto; padding: 22px; animation: paneIn 0.3s var(--ease); }
+.admin .hist { list-style: none; margin: 8px 0 0; padding: 0; }
+.admin .hist li { display: grid; grid-template-columns: 120px 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.admin .hist .when { font-variant-numeric: tabular-nums; color: var(--grey); }
+@media (max-width: 640px) {
+  .admin .hideSm { display: none; }
+  .admin .modal { padding: 0; align-items: end; }
+  .admin .modal .sheet { border-radius: 14px 14px 0 0; max-height: 94svh; padding: 18px 16px 24px; width: 100%; }
+  .admin .hist li { grid-template-columns: 1fr auto; }
+  .admin .hist .when { grid-column: 1 / -1; }
+  .admin .modal .g2 { grid-template-columns: 1fr; }
+  .admin .modal .kpis dd { font-size: 20px; }
+}

@@ -202,16 +202,6 @@ button { cursor: pointer; background: none; border: 0; }
 .barber p { max-width: 38ch; }
 @media (max-width: 900px) { .barber { grid-column: 1 / -1; } .barber:nth-child(2n) { margin-top: 0; } }
 
-/* proceso horizontal */
-.process { position: relative; }
-.process .pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-.process .rail { display: flex; gap: var(--gutter); padding-inline: var(--gutter); will-change: transform; }
-.step { flex: 0 0 min(76vw, 520px); border-top: 1px solid var(--black); padding-top: 22px; }
-.step .n { font-size: clamp(120px, 16vw, 230px); font-weight: 200; font-variation-settings: "wdth" 62; line-height: 0.8; }
-.step h3 { font-size: 26px; font-weight: 500; margin: 26px 0 10px; }
-.step p { color: var(--grey); max-width: 34ch; }
-.process .title { flex: 0 0 min(80vw, 640px); align-self: flex-end; }
-@media (prefers-reduced-motion: reduce) { .process { height: auto !important; } .process .pin { position: static; height: auto; padding-block: 96px; } .process .rail { flex-direction: column; transform: none !important; } }
 
 /* reserva */
 .booking { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter); }
@@ -380,10 +370,6 @@ button { cursor: pointer; background: none; border: 0; }
   .barber > p.grey { grid-column: 2; margin-top: -6px; }
 
   /* pasos apilados */
-  .process { height: auto !important; }
-  .process .pin { position: static; height: auto; padding-block: 64px; overflow: visible; }
-  .process .rail { flex-direction: column; gap: 0; transform: none !important; }
-  .process .title { flex: none; margin-bottom: 28px; align-self: flex-start; }
   .step { flex: none; display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; padding: 16px 0; border-top: 1px solid var(--line); }
   .step .n { font-size: 44px; grid-row: span 2; line-height: 0.85; }
   .step h3 { margin: 0 0 4px; font-size: 18px; }

@@ -129,8 +129,16 @@ function NewBooking({ config, date, onDone, notify }) {
   const barbers = config.barbers.filter((b) => b.active);
   const [f, setF] = useState({ kind: "turno", barberId: barbers[0]?.id || "", serviceId: "", duration: 30, time: "", name: "", phone: "", note: "" });
   const [slots, setSlots] = useState([]);
+  const [known, setKnown] = useState([]);
   const services = config.services.filter((s) => s.active && s.prices[f.barberId] != null);
   const duration = f.kind === "turno" ? config.services.find((s) => s.id === f.serviceId)?.duration || 30 : Number(f.duration);
+
+  // clientes ya cargados: al escribir el nombre se sugiere y se completa el celular
+  useEffect(() => { api("/api/admin/clients").then((j) => setKnown(j.clients || [])).catch(() => {}); }, []);
+  const setName = (name) => {
+    const hit = known.filter((c) => c.name.toLowerCase() === name.trim().toLowerCase());
+    setF((x) => ({ ...x, name, phone: hit.length === 1 && !x.phone ? hit[0].phone : x.phone }));
+  };
 
   useEffect(() => {
     if (!f.barberId) return;
@@ -177,7 +185,10 @@ function NewBooking({ config, date, onDone, notify }) {
           </select>
         </label>
         {f.kind === "turno" ? (
-          <label className="f">Nombre<input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} /></label>
+          <label className="f">Nombre
+            <input list="clientesConocidos" autoComplete="off" value={f.name} onChange={(e) => setName(e.target.value)} />
+            <datalist id="clientesConocidos">{known.slice(0, 1500).map((c) => <option key={c.key} value={c.name}>{c.phone}</option>)}</datalist>
+          </label>
         ) : (
           <label className="f">Motivo<input value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} placeholder="Almuerzo" /></label>
         )}

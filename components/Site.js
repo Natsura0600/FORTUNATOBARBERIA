@@ -258,34 +258,6 @@ export function Team({ cfg }) {
   );
 }
 
-/* ───────── cómo funciona (secuencia real: pasos para reservar) ───────── */
-export function Process({ cfg }) {
-  const steps = [
-    ["Elegí barbero", "Cada uno tiene sus horarios y sus valores."],
-    ["Elegí el servicio", "Ves el precio final antes de confirmar."],
-    ["Día y horario", `Agenda abierta para los próximos ${cfg.business.bookingDaysAhead} días.`],
-    ["Confirmá", "Recibís un código de turno. Si no podés venir, lo cancelás hasta 3 horas antes."],
-  ];
-  return (
-    <section className="process" data-process>
-      <div className="pin">
-        <div className="rail">
-          <div className="title">
-            <h2 className="display h2" data-reveal><Mask>Reservar</Mask><Mask>lleva un minuto</Mask></h2>
-          </div>
-          {steps.map(([t, d], i) => (
-            <div className="step" key={t}>
-              <div className="n">{i + 1}</div>
-              <h3>{t}</h3>
-              <p>{d}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ───────── avisos ───────── */
 export function Notices({ cfg }) {
   if (!cfg.notices.length) return null;
